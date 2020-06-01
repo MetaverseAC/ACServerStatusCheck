@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -14,6 +15,13 @@ namespace ACServerStatusCheck
 {
 	public class Startup
 	{
+		private IConfiguration _configuration { get; }
+
+		public Startup(IConfiguration configuration)
+		{
+			_configuration = configuration;
+		}
+
 		// This method gets called by the runtime. Use this method to add services to the container.
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
@@ -35,16 +43,25 @@ namespace ACServerStatusCheck
 				endpoints.MapGet("/ping", async context => await context.Response.WriteAsync("pong"));
 				endpoints.MapGet("/status/{server:required}", async context =>
 				{
-					var serverName = context.Request.RouteValues["server"];
-					if (string.Equals(serverName, "ptr"))
+					var serverName = context.Request.RouteValues["server"] as string;
+					if (string.IsNullOrWhiteSpace(serverName))
 					{
-						var up = await serverCheckAsync("play.metaverse.ac", 9222);
-						context.Response.StatusCode = up ? 200 : 504;
+						context.Response.StatusCode = 400;
+						return;
 					}
-					else
+
+					var host = _configuration.GetSection(serverName);
+					var address = host?.GetValue<string>("address");
+					var port = host?.GetValue<int>("port");
+
+					if (host == null || address == null || port == null)
 					{
 						context.Response.StatusCode = 404;
+						return;
 					}
+					
+					var up = await serverCheckAsync(address, port.Value);
+					context.Response.StatusCode = up ? 200 : 504;					
 				});
 			});
 		}
