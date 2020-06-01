@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACServerStatusCheck", "ACServerStatusCheck.csproj", "{77ACA515-9D59-46DF-8E27-11FDFB19A38F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77ACA515-9D59-46DF-8E27-11FDFB19A38F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77ACA515-9D59-46DF-8E27-11FDFB19A38F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77ACA515-9D59-46DF-8E27-11FDFB19A38F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77ACA515-9D59-46DF-8E27-11FDFB19A38F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1E1EC00F-844A-4895-AF30-5DB8CC637FAA}
+	EndGlobalSection
+EndGlobal
