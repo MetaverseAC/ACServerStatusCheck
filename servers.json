@@ -14,5 +14,9 @@
 	"dnf-test": {
 		"address": "dfx.drunkenfell.com",
 		"port": 9100
+	},
+	"coldeve": {
+		"address": "play.coldeve.online",
+		"port": 9000
 	}
 }
